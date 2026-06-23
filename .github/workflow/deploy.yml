@@ -1,0 +1,27 @@
+name: Docker Build
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Login DockerHub
+      uses: docker/login-action@v3
+      with:
+        username: ${{ secrets.matias4anex }}
+        password: ${{ secrets.Zmu6t90mat }}
+
+    - name: Build
+      run: docker build -t ${{ secrets.matias4anex }}/evaluacion-nginx:latest .
+
+    - name: Push
+      run: docker push ${{ secrets.matias4anex }}/evaluacion-nginx:latest
